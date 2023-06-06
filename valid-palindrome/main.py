@@ -1,4 +1,3 @@
-import re
 """
 A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
 
@@ -24,7 +23,6 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 def isPalindrome(s: str) -> bool:
     #if string is empty, return
     if not s: return True
-    #palindrome
     #remove all non-alphanum chars from s
     #remove all white space from s
     parsed_string = ''.join(filter(str.isalnum, s)).replace(" ", "").lower()
