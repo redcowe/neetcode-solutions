@@ -18,53 +18,22 @@ Output: true
 Example 3:
 Input: s = "(]"
 Output: false
+
+Example 4:
+Input: s = "[()]"
+Output: true
 """
 
-# Initial solution that doesn't pass is below:
 def isValid(s: str) -> bool:
-    #if string is empty to start just return false
-    if not s: return False
-    parentheses_map = {
-        ')':'(',
-        ']':'[',
-        '}':'{'
-    }
-    if len(s) == 1: return False
-    if len(s) % 2 != 0: return False
-    while s != "":
-        current_char = s[0]
-        if s == "": return True
-        if current_char not in parentheses_map.values(): return False
-        if parentheses_map.get(s[1]) == current_char:
-            s = s[2:]
-        else: return False
-    return True
-
-# valid_chars = ['a', 'b', 'c']
-# test_char = "a"
-# if test_char not in valid_chars: print("not valid")
-
-print(isValid("()"))
-print(isValid("()[]{}"))
-print(isValid("(]"))
-
-
-# Passing solution
-class Solution:
-    def isValid(self, s: str) -> bool:
-        stack = []
-        for char in s:
-            if char == '(' or char == '{' or char == '[':
-                stack.append(char)
-            else:
-                if not stack:
-                    return False
-                if char == ')' and stack[-1] == '(':
-                    stack.pop()
-                elif char == '}' and stack[-1] == '{':
-                    stack.pop()
-                elif char == ']' and stack[-1] == '[':
-                    stack.pop()
-                else:
-                    return False
-        return not stack
+    map = {")": "(", "]": "[", "}": "{"}
+    stack = []
+    for char in s:
+        #if char is an open parantheses, push it onto stack
+        if char not in map:
+            stack.append(char)
+            continue
+        #if stack is empty(stack is empty is if s is empty or char is a close parantheses) or the last value in the stack doesn't have a key in the map, return false
+        if not stack or stack[-1] != map[char]:
+            return False
+        stack.pop()
+    return not stack
