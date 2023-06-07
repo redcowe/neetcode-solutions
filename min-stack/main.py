@@ -30,25 +30,34 @@ minStack.top();    // return 0
 minStack.getMin(); // return -2
 
 """
+import math
 
 class MinStack:
 
-    map = dict()
-    stack = None
-
     def __init__(self):
         self.stack = []
+        self.min_stack = []
 
 
     def push(self, val: int) -> None:
-        self.stack.append(val)
+        if self.stack == []:
+            self.stack.append(val)
+            self.min_stack.append(val)
+        elif val <= self.min_stack[-1]:
+            self.stack.append(val)
+            self.min_stack.append(val)
+        else:
+            self.stack.append(val)
+            self.min_stack.append(self.min_stack[-1])
 
     def pop(self) -> None:
+        self.min_stack.pop()
         self.stack.pop()
+
 
     def top(self) -> int:
         return self.stack[-1]
 
 
     def getMin(self) -> int:
-        return sorted(self.stack)[0]
+        return self.min_stack[-1]
