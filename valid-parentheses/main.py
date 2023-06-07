@@ -27,15 +27,16 @@ Output: true
 def isValid(s: str) -> bool:
     map = {")": "(", "]": "[", "}": "{"}
     stack = []
+
+    #iterate over string
     for char in s:
-        #if char is an open parantheses, push it onto stack
-        if char not in map:
+        #check for if it's open para and append to stack
+        if char in map.values():
             stack.append(char)
             continue
-        #if stack is empty(stack is empty is if s is empty or char is a close parantheses) or the last value in the stack doesn't have a key in the map, return false
-        if not stack or stack[-1] != map[char]:
+        #if it's a close paranthese and the value on top of stack equals map[char], pop
+        if char in map and stack and map[char] == stack[-1]:
+            stack.pop()
+        else:
             return False
-        stack.pop()
-    return not stack
-
-print("]"[-1])
+    return stack == []
