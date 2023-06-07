@@ -40,5 +40,3 @@ def isPalindrome(s: str) -> bool:
             #if values arent the same, return False
             return False
     return True
-
-isPalindrome("random string")

@@ -37,3 +37,5 @@ def isValid(s: str) -> bool:
             return False
         stack.pop()
     return not stack
+
+print("]"[-1])
