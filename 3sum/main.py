@@ -20,7 +20,7 @@ def threeSum(nums: list[int]) -> list[list[int]]:
         """
         current_sum = nums[left] + nums[right]
         inverse = current_sum * -1
-        if inverse in nums and nums[left] != :
+        if inverse in nums and nums[left]:
             match = [nums[left], nums[right], inverse]
             match.sort()
             if match not in result:
