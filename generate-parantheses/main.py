@@ -1,21 +1,20 @@
 def generateParenthesis(n: int) -> list[str]:
-        #there can only be n number of open and clothes parantheses
-        #can only add as many open parantheses are we want
-        #there can never be more close paranthese than open paranthese
-        answer = []
-        def backtracking(cur_string, left_count, right_count):
-            if len(cur_string) == 2 * n:
-                answer.append("".join(cur_string))
+        stack = []
+        result = []
+        def backtracking(open, close, cur_string):
+            if len(cur_string) == n*2:
+                result.append("".join(stack))
                 return
-            if left_count < n:
+            if open < n:
                 cur_string.append("(")
-                backtracking(cur_string, left_count + 1, right_count)
+                backtracking(open + 1, close, cur_string)
                 cur_string.pop()
-            if right_count < left_count:
+            if close < n and close < open:
                 cur_string.append(")")
-                backtracking(cur_string, left_count, right_count + 1)
+                backtracking(open, close + 1, cur_string)
                 cur_string.pop()
-        backtracking([], 0, 0)
-        return answer
 
-generateParenthesis(3)
+        backtracking(0, 0, stack)
+        return result
+
+print(generateParenthesis(6))
